@@ -1,462 +1,357 @@
-/* style.css */
-
-/* 안전 */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
+@import url(reset.css);
 :root {
   --bg: #fffcfa;
   --text: #1d1d1d;
-
-  --page-max: 1920px;
-  --pad-x: 180px;
-
-  --sec-gap: 160px;
-  --header-h: 80px;
-
-  --r16: 16px;
-  --r14: 14px;
-
-  --line: #e9e4dd;
-}
-
-html {
-  scroll-behavior: smooth;
+  --pad: 180px;
+  --gapSec: 160px;
+  --headerH: 80px;
 }
 
 body {
-  font-family:
-    Pretendard,
-    system-ui,
-    -apple-system,
-    "Noto Sans KR",
-    sans-serif;
+  font-family: Pretendard, sans-serif;
   color: var(--text);
-  background: transparent; /* 초기: 배경 없음 */
-  transition: background-color 0.25s ease;
+  background: transparent;
+  transition: background 0.35s ease;
 }
 
-/* 섹션1(100vh) 지나면 배경 생김 */
-body.is-scrolled {
+body.bg-on {
   background: var(--bg);
 }
 
-/* 1920 캔버스 중앙 고정 (아임웹 느낌) */
-.page {
-  max-width: var(--page-max);
-  margin: 0 auto;
-  padding-left: var(--pad-x);
-  padding-right: var(--pad-x);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* 헤더는 전체폭 fixed, 내부는 1920 중앙 */
-.site-header {
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@font-face {
+  font-family: "Neulis Cursive";
+  src:
+    url("fonts/NeulisCursive.woff2") format("woff2"),
+    url("fonts/NeulisCursive.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* HEADER */
+.header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--header-h);
-  z-index: 100; /* ✅ 항상 최상단 */
-  background: transparent; /* ✅ 히어로 위에 겹침 */
-  pointer-events: none; /* 내부만 클릭되게 */
-}
-
-.site-header .page {
-  height: 100%;
-}
-
-.header-inner {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  height: var(--headerH);
+  display: flex;
   align-items: center;
-  pointer-events: auto;
+  justify-content: center;
+  z-index: 300;
 }
 
 .logo {
-  grid-column: 2 / 3;
-  justify-self: center;
-  font-family: "Neulis Cursive", Pretendard, system-ui, sans-serif; /* 폴백 */
+  font-family: "Neulis Cursive";
   font-weight: 900;
   font-size: 28px;
-  letter-spacing: -0.5px;
 }
 
 .nav {
-  grid-column: 3 / 4;
-  justify-self: end;
+  position: absolute;
+  right: var(--pad);
   display: flex;
-  align-items: center;
   gap: 32px;
-}
-
-.nav-link {
   font-size: 16px;
   font-weight: 500;
-  text-decoration: none;
-  color: var(--text);
-  opacity: 0.92;
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
 }
-.nav-link:hover {
+
+.nav a {
+  opacity: 0.9;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.nav a:hover {
   opacity: 1;
   transform: translateY(-1px);
 }
 
-.lang-btn {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text);
-  background: transparent;
-  border: 0;
-  padding: 8px 10px;
-  margin-right: -10px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition:
-    background-color 0.18s ease,
-    transform 0.18s ease;
+/* ✅ SECTION 1 = fixed 배경 */
+.sec_1 {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
-.lang-btn:hover {
-  background: rgba(0, 0, 0, 0.06);
-  transform: translateY(-1px);
-}
-
-/* 섹션 공통 */
-.sec {
-  scroll-margin-top: calc(var(--header-h) + 24px);
-}
-
-/* ✅ 섹션1 빼고 나머지에만 간격 넣기 */
-.sec-about,
-.sec-archive,
-.sec-shop {
-  padding-top: var(--sec-gap);
-}
-
-/* SECTION 1 */
-.sec-hero {
-  height: 100vh; /* ✅ 헤더 겹침 */
-  position: relative;
-  z-index: 1;
-}
-
-.hero-frame {
-  height: 100%;
-  padding-left: 0; /* ✅ 히어로는 좌우패딩 없이 1920 꽉 */
-  padding-right: 0;
-  max-width: var(--page-max);
-}
-
-.hero-img {
+.sec_1 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* 섹션2~푸터가 섹션1을 덮는 구조 */
-.overlay-stack {
+/* ✅ 1화면 스크롤 공간 */
+.hero-spacer {
+  height: 100vh;
+}
+
+/* ✅ overlay 레이어: 섹션2부터 섹션1 위로 덮음 */
+.overlay {
   position: relative;
-  z-index: 10;
-  background: transparent;
-  transition: background-color 0.25s ease;
-}
-body.is-scrolled .overlay-stack {
-  background: var(--bg); /* ✅ 이때부터 히어로 안 비침 */
+  z-index: 2;
+  background: #fffcfa;
 }
 
-/* Titles */
-.sec-title {
-  text-align: center;
-  font-size: 40px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  margin: 0;
-}
-
-/* SECTION 2 (sticky 멈춤) */
-.about-sticky-zone {
+/* SECTION 2 (About) - 스티키 멈춤 구현
+   섹션 자체는 200vh로 "머무는 구간" 만들고,
+   안쪽 박스를 sticky로 고정 */
+.sec_2 {
   height: 200vh;
-}
-.about-sticky-inner {
-  position: sticky;
-  top: 0; /* ✅ 헤더와 겹치게(원하면 80으로 바꿔) */
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.about-card {
-  width: 100%;
-  min-height: 100vh;
   background: #fff;
+  position: relative;
+}
+
+.about_sticky {
+  position: sticky;
+  top: var(--headerH);
+  height: calc(100vh - var(--headerH));
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 0 var(--pad);
 }
 
-.about-text {
-  text-align: center;
+.about_text {
   font-size: 24px;
   font-weight: 700;
   line-height: 44px;
   letter-spacing: -2px;
-  margin: 0;
-  padding: 24px;
 }
 
-/* SECTION 3 (Archive grid) */
-/* ✅ 1920 기준: 컨텐츠 폭 1560(=1920-360), 그 안에 372*4 + 24*3 = 1560 딱 맞음 */
-.archive-wrap {
-  margin-top: 35px;
+/* SECTION 3 */
+.sec_3 {
+  padding: var(--gapSec) var(--pad) 0;
+}
+
+.title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+/* 8-grid */
+.content_wrap_3 {
   display: grid;
   grid-template-columns: repeat(4, 372px);
   gap: 24px;
+  justify-content: center;
+  margin: 0 auto;
 }
 
-.img-card {
+.grid_card img {
   width: 372px;
   height: 280px;
-  border-radius: var(--r16);
-  overflow: hidden;
+  border-radius: 16px;
   display: block;
-  text-decoration: none;
-  background: #f3f3f3;
   transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease;
-}
-.img-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scale(1);
-  transition: transform 0.35s ease;
-}
-.img-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
-}
-.img-card:hover img {
-  transform: scale(1.04);
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
 
-/* From Instagram */
+.grid_card:hover img {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  filter: saturate(1.05);
+}
+
+/* INSTAGRAM */
 .insta-block {
   margin-top: 64px;
 }
 .insta-title {
   font-size: 24px;
   font-weight: 600;
-  letter-spacing: -0.5px;
-  margin: 0 0 20px 0;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-/* ✅ 슬라이더 제거: 고정 카드 나열 */
-.insta-grid {
+/* ✅ LOOP (끊김 방지 핵심 포함) */
+.turn-wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.turn {
   display: flex;
+  align-items: center;
   gap: 16px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  -webkit-overflow-scrolling: touch;
-}
-.insta-grid::-webkit-scrollbar {
-  height: 8px;
-}
-.insta-grid::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.12);
-  border-radius: 999px;
-}
-.insta-grid::-webkit-scrollbar-track {
-  background: transparent;
+  width: max-content; /* ✅ 트랙이 내용만큼 길어짐 */
+  will-change: transform;
+  animation: scroll_move var(--loop-speed, 20s) linear infinite;
 }
 
-.insta-card {
+.turn_con {
+  flex: 0 0 auto; /* ✅ 줄어들지 않게 */
+}
+
+.turn-wrap:hover .turn {
+  animation-play-state: paused; /* 실무형: hover 시 멈춤 */
+}
+
+.turn_con img {
   width: 280px;
   height: 210px;
-  border-radius: var(--r14);
-  overflow: hidden;
+  border-radius: 14px;
   display: block;
-  flex: 0 0 auto;
-  background: #f3f3f3;
-  text-decoration: none;
   transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
-.insta-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scale(1);
-  transition: transform 0.35s ease;
+
+.turn_con:hover img {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.12);
 }
-.insta-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
-}
-.insta-card:hover img {
-  transform: scale(1.04);
+
+@keyframes scroll_move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * var(--loop-dist)));
+  }
 }
 
 /* CTA */
-.insta-cta {
-  margin-top: 90px;
-  display: flex;
-  justify-content: center;
-}
-
-.cta-btn {
+.insta-btn {
   width: 326px;
   height: 70px;
-  border-radius: 999px;
-  display: inline-flex;
+  margin: 90px auto 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 700;
-  letter-spacing: -0.5px;
-
-  background: #e9e4dd;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-
+  border-radius: 999px;
+  background: #1d1d1d;
+  color: #fff;
+  font-weight: 600;
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background-color 0.18s ease;
+    transform 0.2s ease,
+    background 0.2s ease,
+    letter-spacing 0.2s ease;
 }
-.cta-btn:hover {
-  background: #dcd3c7;
+.insta-btn:hover {
+  background: #000;
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
 }
 
-/* SECTION 4 (Shop) */
-.shop-wrap {
+/* SECTION 4 */
+.sec_4 {
+  padding: var(--gapSec) var(--pad) 0;
+}
+
+.shop_wrap {
   margin-top: 35px;
-  display: grid;
-  grid-template-columns: repeat(4, 280px);
-  gap: 24px;
-  justify-content: space-between;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-.shop-card {
+.shop_item {
   width: 280px;
   height: 320px;
-  border-radius: 18px;
-  background: #f1f1f1;
-  text-decoration: none;
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 24px;
+  border-radius: 20px;
+  background: #f3f3f3;
+  padding-top: 40px;
+  text-align: center;
   transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    background-color 0.22s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.shop-img {
+.shop_item img {
   width: 200px;
   height: 200px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #e7e7e7;
-}
-.shop-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
-  transform: scale(1);
-  transition: transform 0.35s ease;
+  margin: 0 auto;
 }
-.shop-name {
+
+.shop_item p {
   margin-top: 24px;
   font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.5px;
 }
-.shop-card:hover {
-  transform: translateY(-4px);
-  background: #ededed;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
-}
-.shop-card:hover .shop-img img {
-  transform: scale(1.04);
+
+.shop_link:hover .shop_item {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* FOOTER */
-.site-footer {
-  padding-top: 140px;
-  padding-bottom: 80px;
-}
-.footer-line {
-  width: 100%;
-  height: 1px;
-  background: var(--line);
-}
-.footer-inner {
-  padding-top: 100px;
+.footer {
+  margin-top: 140px;
   text-align: center;
-}
-.footer-logo {
-  font-family: "Neulis Cursive", Pretendard, system-ui, sans-serif;
-  font-weight: 900;
-  font-size: 28px;
-  letter-spacing: -0.5px;
-}
-.footer-meta {
-  margin-top: 10px;
-  font-size: 12px;
-  opacity: 0.7;
+  padding-bottom: 120px;
 }
 
-/* ✅ 1024까지 같은 “형태” 유지 */
-@media (max-width: 1280px) {
+.footer_line {
+  width: 100%;
+  height: 1px;
+  background: #e9e4dd;
+}
+
+.footer_logo {
+  margin-top: 100px;
+  font-family: "Neulis Cursive";
+  font-weight: 900;
+  font-size: 28px;
+}
+
+/* ✅ 반응형: 1024까지 레이아웃 형태 유지 */
+@media (max-width: 1440px) {
   :root {
-    --pad-x: 120px;
+    --pad: 120px;
   }
-  .archive-wrap {
+
+  .content_wrap_3 {
     grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
   }
-  .img-card {
+  .grid_card img {
     width: 100%;
+    height: auto;
+    aspect-ratio: 372 / 280;
+  }
+
+  .turn {
+    gap: 14px;
+  }
+  .turn_con img {
+    width: 220px;
+    height: 165px;
   }
 }
 
 @media (max-width: 1024px) {
   :root {
-    --pad-x: 64px;
-    --sec-gap: 120px;
+    --pad: 56px;
   }
 
-  .archive-wrap {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-  .img-card {
-    width: 100%;
-    height: 260px;
+  .nav {
+    right: var(--pad);
   }
 
-  .shop-wrap {
+  .content_wrap_3 {
     grid-template-columns: repeat(2, 1fr);
-    justify-content: stretch;
+    gap: 16px;
   }
-  .shop-card {
-    width: 100%;
+
+  .turn_con img {
+    width: 200px;
+    height: 150px;
   }
 }
