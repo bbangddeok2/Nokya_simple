@@ -1,0 +1,295 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nokya</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Pretendard -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
+
+    <script defer src="js/main.js"></script>
+  </head>
+  <body>
+    <!-- Header: hero 위에 겹치기 -->
+    <header class="site-header" id="top">
+      <div class="page">
+        <div class="header-inner">
+          <div class="logo">Nokya</div>
+
+          <nav class="nav" aria-label="Primary">
+            <a class="nav-link" href="#about" data-i18n="nav.about">About</a>
+            <a class="nav-link" href="#archive" data-i18n="nav.archive"
+              >Archive</a
+            >
+            <a class="nav-link" href="#shop" data-i18n="nav.shop">Shop</a>
+            <button class="lang-btn" type="button" id="langToggle">EN</button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- SECTION 1: 1920 캔버스 안에서 100vh -->
+      <section class="sec sec-hero" id="hero" aria-label="Hero">
+        <div class="page hero-frame">
+          <img class="hero-img" src="img/sec_1.png" alt="Nokya hero" />
+        </div>
+      </section>
+
+      <!-- SECTION 2~FOOTER: 섹션1을 덮는 레이어 -->
+      <div class="overlay-stack">
+        <!-- SECTION 2 -->
+        <section class="sec sec-about" id="about" aria-label="About">
+          <div class="page">
+            <div class="about-sticky-zone">
+              <div class="about-sticky-inner">
+                <div class="about-card">
+                  <p class="about-text" data-i18n="about.text">
+                    녹야는 말없이 타는 작은 양초도깨비입니다.<br />
+                    낮은 온도의 위로를 이곳에 남기고,<br />
+                    감정에 흔들려도 쉽게 꺼지지 않는 순간들을 기록합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="sec sec-archive" id="archive" aria-label="Archive">
+          <div class="page">
+            <h2 class="sec-title" data-i18n="archive.title">도깨비즈의 기록</h2>
+
+            <div class="archive-wrap" aria-label="Archive grid">
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_1.png" alt="Archive 1" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_2.png" alt="Archive 2" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_3.png" alt="Archive 3" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_4.png" alt="Archive 4" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_5.png" alt="Archive 5" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_6.png" alt="Archive 6" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_7.png" alt="Archive 7" />
+              </a>
+              <a
+                class="img-card"
+                href="https://www.instagram.com/nokyaong/"
+                target="_blank"
+                rel="noopener"
+              >
+                <img src="img/sec_3_8.png" alt="Archive 8" />
+              </a>
+            </div>
+
+            <div class="insta-block">
+              <div class="insta-title" data-i18n="insta.from">
+                From Instagram
+              </div>
+
+              <!-- ✅ 섹션3 슬라이더 제거: 고정 리스트 -->
+              <div class="insta-grid" aria-label="Instagram grid">
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_1.png" alt="Insta 1" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_2.png" alt="Insta 2" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_3.png" alt="Insta 3" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_4.png" alt="Insta 4" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_5.png" alt="Insta 5" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_1.png" alt="Insta 1" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_2.png" alt="Insta 2" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_3.png" alt="Insta 3" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_4.png" alt="Insta 4" />
+                </a>
+                <a
+                  class="insta-card"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <img src="img/insta_5.png" alt="Insta 5" />
+                </a>
+              </div>
+
+              <div class="insta-cta">
+                <a
+                  class="cta-btn"
+                  href="https://www.instagram.com/nokyaong/"
+                  target="_blank"
+                  rel="noopener"
+                  data-i18n="insta.more"
+                >
+                  인스타에서 더 보기
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="sec sec-shop" id="shop" aria-label="Shop">
+          <div class="page">
+            <h2 class="sec-title" data-i18n="shop.title">도깨비즈 상점</h2>
+
+            <div class="shop-wrap" aria-label="Shop grid">
+              <a class="shop-card" href="#top">
+                <div class="shop-img">
+                  <img src="img/sec_4_3.png" alt="Shop item" />
+                </div>
+                <div class="shop-name">반짝이는 순간</div>
+              </a>
+
+              <a class="shop-card" href="#top">
+                <div class="shop-img">
+                  <img src="img/sec_4_3.png" alt="Shop item" />
+                </div>
+                <div class="shop-name">반짝이는 순간</div>
+              </a>
+
+              <a class="shop-card" href="#top">
+                <div class="shop-img">
+                  <img src="img/sec_4_3.png" alt="Shop item" />
+                </div>
+                <div class="shop-name">반짝이는 순간</div>
+              </a>
+
+              <a class="shop-card" href="#top">
+                <div class="shop-img">
+                  <img src="img/sec_4_3.png" alt="Shop item" />
+                </div>
+                <div class="shop-name">반짝이는 순간</div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-footer" id="footer">
+          <div class="page">
+            <div class="footer-line"></div>
+
+            <div class="footer-inner">
+              <div class="footer-logo">Nokya</div>
+              <div class="footer-meta">
+                © 2026 Dokkaebiz. All rights reserved.
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,462 @@
+/* style.css */
+
+/* 안전 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #fffcfa;
+  --text: #1d1d1d;
+
+  --page-max: 1920px;
+  --pad-x: 180px;
+
+  --sec-gap: 160px;
+  --header-h: 80px;
+
+  --r16: 16px;
+  --r14: 14px;
+
+  --line: #e9e4dd;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    Pretendard,
+    system-ui,
+    -apple-system,
+    "Noto Sans KR",
+    sans-serif;
+  color: var(--text);
+  background: transparent; /* 초기: 배경 없음 */
+  transition: background-color 0.25s ease;
+}
+
+/* 섹션1(100vh) 지나면 배경 생김 */
+body.is-scrolled {
+  background: var(--bg);
+}
+
+/* 1920 캔버스 중앙 고정 (아임웹 느낌) */
+.page {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+/* 헤더는 전체폭 fixed, 내부는 1920 중앙 */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-h);
+  z-index: 100; /* ✅ 항상 최상단 */
+  background: transparent; /* ✅ 히어로 위에 겹침 */
+  pointer-events: none; /* 내부만 클릭되게 */
+}
+
+.site-header .page {
+  height: 100%;
+}
+
+.header-inner {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  pointer-events: auto;
+}
+
+.logo {
+  grid-column: 2 / 3;
+  justify-self: center;
+  font-family: "Neulis Cursive", Pretendard, system-ui, sans-serif; /* 폴백 */
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: -0.5px;
+}
+
+.nav {
+  grid-column: 3 / 4;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text);
+  opacity: 0.92;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+.nav-link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.lang-btn {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  padding: 8px 10px;
+  margin-right: -10px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+.lang-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+/* 섹션 공통 */
+.sec {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+/* ✅ 섹션1 빼고 나머지에만 간격 넣기 */
+.sec-about,
+.sec-archive,
+.sec-shop {
+  padding-top: var(--sec-gap);
+}
+
+/* SECTION 1 */
+.sec-hero {
+  height: 100vh; /* ✅ 헤더 겹침 */
+  position: relative;
+  z-index: 1;
+}
+
+.hero-frame {
+  height: 100%;
+  padding-left: 0; /* ✅ 히어로는 좌우패딩 없이 1920 꽉 */
+  padding-right: 0;
+  max-width: var(--page-max);
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 섹션2~푸터가 섹션1을 덮는 구조 */
+.overlay-stack {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+  transition: background-color 0.25s ease;
+}
+body.is-scrolled .overlay-stack {
+  background: var(--bg); /* ✅ 이때부터 히어로 안 비침 */
+}
+
+/* Titles */
+.sec-title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+/* SECTION 2 (sticky 멈춤) */
+.about-sticky-zone {
+  height: 200vh;
+}
+.about-sticky-inner {
+  position: sticky;
+  top: 0; /* ✅ 헤더와 겹치게(원하면 80으로 바꿔) */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-card {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-text {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: -2px;
+  margin: 0;
+  padding: 24px;
+}
+
+/* SECTION 3 (Archive grid) */
+/* ✅ 1920 기준: 컨텐츠 폭 1560(=1920-360), 그 안에 372*4 + 24*3 = 1560 딱 맞음 */
+.archive-wrap {
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(4, 372px);
+  gap: 24px;
+}
+
+.img-card {
+  width: 372px;
+  height: 280px;
+  border-radius: var(--r16);
+  overflow: hidden;
+  display: block;
+  text-decoration: none;
+  background: #f3f3f3;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+.img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.35s ease;
+}
+.img-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+.img-card:hover img {
+  transform: scale(1.04);
+}
+
+/* From Instagram */
+.insta-block {
+  margin-top: 64px;
+}
+.insta-title {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0 0 20px 0;
+}
+
+/* ✅ 슬라이더 제거: 고정 카드 나열 */
+.insta-grid {
+  display: flex;
+  gap: 16px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
+}
+.insta-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.insta-grid::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+}
+.insta-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.insta-card {
+  width: 280px;
+  height: 210px;
+  border-radius: var(--r14);
+  overflow: hidden;
+  display: block;
+  flex: 0 0 auto;
+  background: #f3f3f3;
+  text-decoration: none;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+.insta-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.35s ease;
+}
+.insta-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+.insta-card:hover img {
+  transform: scale(1.04);
+}
+
+/* CTA */
+.insta-cta {
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+}
+
+.cta-btn {
+  width: 326px;
+  height: 70px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+
+  background: #e9e4dd;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+.cta-btn:hover {
+  background: #dcd3c7;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* SECTION 4 (Shop) */
+.shop-wrap {
+  margin-top: 35px;
+  display: grid;
+  grid-template-columns: repeat(4, 280px);
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.shop-card {
+  width: 280px;
+  height: 320px;
+  border-radius: 18px;
+  background: #f1f1f1;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.22s ease;
+}
+
+.shop-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #e7e7e7;
+}
+.shop-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.35s ease;
+}
+.shop-name {
+  margin-top: 24px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+.shop-card:hover {
+  transform: translateY(-4px);
+  background: #ededed;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+.shop-card:hover .shop-img img {
+  transform: scale(1.04);
+}
+
+/* FOOTER */
+.site-footer {
+  padding-top: 140px;
+  padding-bottom: 80px;
+}
+.footer-line {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+}
+.footer-inner {
+  padding-top: 100px;
+  text-align: center;
+}
+.footer-logo {
+  font-family: "Neulis Cursive", Pretendard, system-ui, sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: -0.5px;
+}
+.footer-meta {
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ✅ 1024까지 같은 “형태” 유지 */
+@media (max-width: 1280px) {
+  :root {
+    --pad-x: 120px;
+  }
+  .archive-wrap {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .img-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --pad-x: 64px;
+    --sec-gap: 120px;
+  }
+
+  .archive-wrap {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .img-card {
+    width: 100%;
+    height: 260px;
+  }
+
+  .shop-wrap {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: stretch;
+  }
+  .shop-card {
+    width: 100%;
+  }
+}
