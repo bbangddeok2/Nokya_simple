@@ -309,6 +309,27 @@ a {
   font-family: "Neulis Cursive";
   font-weight: 900;
   font-size: 28px;
+  margin-bottom: 28px;
+}
+
+.sns_wrap {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.sns_icon {
+  width: 19px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+}
+
+.copy {
+  font-size: 14px;
+  color: #9c9c9c;
 }
 
 /* ✅ 반응형: 1024까지 레이아웃 형태 유지 */
