@@ -321,10 +321,13 @@ a {
 }
 
 .sns_icon {
-  width: 19px;
-  height: 19px;
+  width: 25px;
   display: flex;
   align-items: center;
+}
+
+.sns_icon img {
+  width: 100%;
 }
 
 .copy {
