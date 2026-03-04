@@ -163,6 +163,71 @@
         </div>
       </section>
 
+      <!-- ✅ NEW SECTION (TobiScore Preview) -->
+      <section class="sec_tobi" id="tobi">
+        <div class="container">
+          <div class="tobi_head">
+            <div class="tobi_title" data-i18n="tobi.title">TobiScore</div>
+            <div class="tobi_desc" data-i18n="tobi.desc">
+              하루 10초 체크로 오늘의 생활 안정 점수를 기록해요.
+            </div>
+          </div>
+
+          <div class="tobi_card">
+            <div class="tobi_card_left">
+              <div class="tobi_kicker" data-i18n="tobi.kicker">
+                오늘의 프리뷰
+              </div>
+
+              <div class="tobi_scoreline">
+                <div class="tobi_score_num" id="tobiScoreNum">72</div>
+                <div class="tobi_score_meta">
+                  <div
+                    class="tobi_level"
+                    id="tobiLevelText"
+                    data-i18n="tobi.level.tobi"
+                  >
+                    토비
+                  </div>
+                  <div class="tobi_small" data-i18n="tobi.small">
+                    생활 안정성 점수
+                  </div>
+                </div>
+              </div>
+
+              <div class="tobi_bar" aria-label="tobi score bar">
+                <i id="tobiBarFill" style="width: 72%"></i>
+              </div>
+
+              <div class="tobi_tags" id="tobiTags">
+                <span class="tobi_tag" data-i18n="tobi.tag1">충동 방어</span>
+                <span class="tobi_tag" data-i18n="tobi.tag2">루틴</span>
+                <span class="tobi_tag" data-i18n="tobi.tag3">회복</span>
+              </div>
+            </div>
+
+            <div class="tobi_card_right">
+              <button
+                class="tobi_btn"
+                id="openTobiModal"
+                type="button"
+                data-i18n="tobi.open"
+              >
+                10초 체크 열어보기
+              </button>
+
+              <a class="tobi_link" href="#" data-i18n="tobi.link">
+                토비스코어 자세히 보기 →
+              </a>
+
+              <div class="tobi_note" data-i18n="tobi.note">
+                메인 톤을 해치지 않도록, 여기서는 ‘프리뷰’만 보여줘요.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- SECTION 4 -->
       <section class="sec_4" id="shop">
         <div class="container">
@@ -203,29 +268,158 @@
         <div class="footer_logo">Nokya</div>
         <div class="sns_wrap">
           <div class="sns_icon">
-            <a href="https://www.instagram.com/nokyaong/">
-              <img src="img/insta_icon.png" alt="insta_logo" />
-            </a>
+            <a href="https://www.instagram.com/nokyaong/"
+              ><img src="img/insta_icon.png" alt="insta_logo"
+            /></a>
           </div>
           <div class="sns_icon">
-            <a href="https://www.youtube.com/@Nokyaong">
-              <img src="img/youtube_icon.png" alt="youtube_logo" />
-            </a>
+            <a href="https://www.youtube.com/@Nokyaong"
+              ><img src="img/youtube_icon.png" alt="youtube_logo"
+            /></a>
           </div>
           <div class="sns_icon">
-            <a href="https://x.com/Nokya_ong/">
-              <img src="img/X_icon.png" alt="twitter_logo" />
-            </a>
+            <a href="https://x.com/Nokya_ong/"
+              ><img src="img/X_icon.png" alt="twitter_logo"
+            /></a>
           </div>
           <div class="sns_icon">
-            <a href="https://www.tiktok.com/@nokya_yaong">
-              <img src="img/tiktok_icon.png" alt="tiktok_logo" />
-            </a>
+            <a href="https://www.tiktok.com/@nokya_yaong"
+              ><img src="img/tiktok_icon.png" alt="tiktok_logo"
+            /></a>
           </div>
         </div>
         <div class="copy">© 2026 Dokkaebiz. All rights reserved.</div>
       </footer>
     </main>
+
+    <!-- ✅ TOBI MODAL -->
+    <div class="tobi_modal_back" id="tobiModal" aria-hidden="true">
+      <div
+        class="tobi_modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="TobiScore check"
+      >
+        <button
+          class="tobi_close"
+          id="closeTobiModal"
+          type="button"
+          aria-label="close"
+        >
+          ✕
+        </button>
+
+        <div class="tobi_modal_head">
+          <div class="tobi_modal_title" data-i18n="tobi.modal.title">
+            10초 체크
+          </div>
+          <div class="tobi_modal_desc" data-i18n="tobi.modal.desc">
+            오늘 상태를 간단히 체크하면 점수/레벨/부적이 계산돼요.
+          </div>
+        </div>
+
+        <div class="tobi_modal_grid">
+          <div class="tobi_panel">
+            <div class="tobi_panel_title" data-i18n="tobi.modal.state">
+              상태
+            </div>
+
+            <label class="tobi_field">
+              <div class="tobi_field_top">
+                <b data-i18n="tobi.modal.energy">에너지</b>
+                <span><span id="vEnergy">3</span>/5</span>
+              </div>
+              <input id="energy" type="range" min="1" max="5" value="3" />
+            </label>
+
+            <label class="tobi_field">
+              <div class="tobi_field_top">
+                <b data-i18n="tobi.modal.stress">스트레스</b>
+                <span><span id="vStress">3</span>/5</span>
+              </div>
+              <input id="stress" type="range" min="1" max="5" value="3" />
+            </label>
+
+            <label class="tobi_field">
+              <div class="tobi_field_top">
+                <b data-i18n="tobi.modal.urge">소비 욕구</b>
+                <span><span id="vUrge">2</span>/5</span>
+              </div>
+              <input id="urge" type="range" min="1" max="5" value="2" />
+            </label>
+          </div>
+
+          <div class="tobi_panel">
+            <div class="tobi_panel_title" data-i18n="tobi.modal.routine">
+              루틴
+            </div>
+
+            <label class="tobi_check"
+              ><input class="rt" type="checkbox" value="save" />
+              <span data-i18n="tobi.modal.r1">지출을 아꼈어요</span></label
+            >
+            <label class="tobi_check"
+              ><input class="rt" type="checkbox" value="noimpulse" />
+              <span data-i18n="tobi.modal.r2">충동구매를 참았어요</span></label
+            >
+            <label class="tobi_check"
+              ><input class="rt" type="checkbox" value="sleep" />
+              <span data-i18n="tobi.modal.r3">루틴/수면을 지켰어요</span></label
+            >
+            <label class="tobi_check"
+              ><input class="rt" type="checkbox" value="calm" />
+              <span data-i18n="tobi.modal.r4">마음을 정리했어요</span></label
+            >
+
+            <div class="tobi_modal_actions">
+              <button
+                class="tobi_action_btn"
+                id="calcTobi"
+                type="button"
+                data-i18n="tobi.modal.calc"
+              >
+                점수 계산
+              </button>
+              <button
+                class="tobi_action_btn ghost"
+                id="copyTobi"
+                type="button"
+                data-i18n="tobi.modal.copy"
+              >
+                결과 복사
+              </button>
+            </div>
+          </div>
+
+          <div class="tobi_panel result">
+            <div class="tobi_panel_title" data-i18n="tobi.modal.result">
+              결과
+            </div>
+
+            <div class="tobi_result_top">
+              <div class="tobi_result_score">
+                <span id="modalScore">0</span><span class="small">/100</span>
+              </div>
+              <div
+                class="tobi_result_level"
+                id="modalLevel"
+                data-i18n="tobi.level.seed"
+              >
+                씨앗
+              </div>
+            </div>
+
+            <div class="tobi_bar" style="margin-top: 10px">
+              <i id="modalBar" style="width: 0%"></i>
+            </div>
+
+            <div class="tobi_talisman_box" id="modalTalismans"></div>
+
+            <div class="tobi_warn" id="urgeWarn" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="js/main.js"></script>
   </body>
