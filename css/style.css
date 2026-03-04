@@ -14,10 +14,6 @@ body {
   transition: background 0.35s ease;
 }
 
-body.bg-on {
-  background: var(--bg);
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -49,6 +45,10 @@ a {
   align-items: center;
   justify-content: center;
   z-index: 300;
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .logo {
@@ -375,4 +375,15 @@ a {
     width: 200px;
     height: 150px;
   }
+}
+
+.header {
+  background: transparent;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.header.is-bg {
+  background: var(--bg);
 }

@@ -3,16 +3,26 @@
 // ✅ 배경 전환: hero-spacer(=100vh) 지나면 배경색 ON
 function setupBgSwitch() {
   const spacer = document.querySelector(".hero-spacer");
+  const header = document.querySelector(".header");
   if (!spacer) return;
 
-  const h = spacer.offsetHeight;
+  const getThreshold = () => {
+    const h = spacer.getBoundingClientRect().height;
+    const headerH = header ? header.offsetHeight : 0;
+    // ✅ 앵커가 headerH만큼 덜 내려가는 걸 보정
+    return Math.max(0, h - headerH);
+  };
 
   const onScroll = () => {
-    if (window.scrollY >= h) document.body.classList.add("bg-on");
-    else document.body.classList.remove("bg-on");
+    const threshold = getThreshold();
+    const on = window.scrollY >= threshold;
+
+    document.body.classList.toggle("bg-on", on);
+    if (header) header.classList.toggle("is-bg", on);
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
   onScroll();
 }
 
@@ -91,34 +101,66 @@ function setupLangToggle() {
 
   let isEN = false;
 
-  const setKR = () => {
-    document.querySelector('[data-i18n="menu.about"]').textContent = "About";
-    document.querySelector('[data-i18n="menu.archive"]').textContent =
-      "Archive";
-    document.querySelector('[data-i18n="menu.shop"]').textContent = "Shop";
-    btn.textContent = "EN";
+  const dict = {
+    KR: {
+      "menu.about": "About",
+      "menu.archive": "Archive",
+      "menu.shop": "Shop",
+      "about.desc":
+        "녹야는 말없이 타는 작은 양초도깨비입니다.<br />낮은 온도의 위로를 이곳에 남기고,<br />감정에 흔들려도 쉽게 꺼지지 않는 순간들을 기록합니다.",
 
-    document.querySelector('[data-i18n="about.desc"]').innerHTML =
-      "녹야는 말없이 타는 작은 양초도깨비입니다.<br />낮은 온도의 위로를 이곳에 남기고,<br />감정에 흔들려도 쉽게 꺼지지 않는 순간들을 기록합니다.";
+      // ✅ 추가
+      "title.archive": "도깨비즈의 기록",
+      "btn.instaMore": "인스타에서 더 보기",
+      "title.shop": "도깨비즈 상점",
+
+      "goods.item1": "작은 물건들",
+      "goods.item2": "카페의 시간",
+      "goods.item3": "반짝이는 순간",
+      "goods.item4": "부드러운 하루",
+    },
+    EN: {
+      "menu.about": "About",
+      "menu.archive": "Archive",
+      "menu.shop": "Shop",
+      "about.desc":
+        "Nokya is a small candle goblin that burns quietly.<br />Leaving gentle warmth here,<br />Recording moments that do not easily fade.",
+
+      // ✅ 요청한 번역
+      "title.archive": "Archive",
+      "btn.instaMore": "See more on Instagram",
+      "title.shop": "Shop",
+
+      "goods.item1": "Goods",
+      "goods.item2": "Cafe",
+      "goods.item3": "Jewellery",
+      "goods.item4": "Cosmetics",
+    },
   };
 
-  const setEN = () => {
-    document.querySelector('[data-i18n="menu.about"]').textContent = "About";
-    document.querySelector('[data-i18n="menu.archive"]').textContent =
-      "Archive";
-    document.querySelector('[data-i18n="menu.shop"]').textContent = "Shop";
-    btn.textContent = "KR";
+  const applyLang = (langKey) => {
+    const map = dict[langKey];
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      const val = map[key];
+      if (val == null) return;
 
-    document.querySelector('[data-i18n="about.desc"]').innerHTML =
-      "Nokya is a small candle goblin that burns quietly.<br />Leaving gentle warmth here,<br />Recording moments that do not easily fade.";
+      // ✅ desc처럼 <br> 필요한 애들은 innerHTML, 나머지는 textContent
+      if (key === "about.desc") el.innerHTML = val;
+      else el.textContent = val;
+    });
+
+    btn.textContent = langKey === "EN" ? "KR" : "EN";
   };
 
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     isEN = !isEN;
-    if (isEN) setEN();
-    else setKR();
+    applyLang(isEN ? "EN" : "KR");
   });
+
+  // 초기값(한국어)
+  applyLang("KR");
 }
 
 // init
